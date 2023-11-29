@@ -22,7 +22,7 @@ class HBNBCommand(cmd.Cmd):
             print('(hbnb)')
 
     def precmd(self, line):
-        """ Handle alt syntax """
+        """handle alt syntax"""
         if not line:
             return line
 
@@ -32,7 +32,7 @@ class HBNBCommand(cmd.Cmd):
         class_and_cmd = line.split("(")[0]
         class_name = class_and_cmd.split(".")[0]
 
-        if class_name not in HBNBCommand.classes:
+        if class_name not in models.classes:
             return line
 
         command = class_and_cmd.split(".")[1]
@@ -90,10 +90,10 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        elif args not in models.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
+        new_instance = models.classes[args]()
         models.storage.save()
         print(new_instance.id)
         models.storage.save()
@@ -120,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        if c_name not in HBNBCommand.classes:
+        if c_name not in models.classes:
             print("** class doesn't exist **")
             return
 
@@ -154,7 +154,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        if c_name not in HBNBCommand.classes:
+        if c_name not in models.classes:
             print("** class doesn't exist **")
             return
 
@@ -184,7 +184,7 @@ class HBNBCommand(cmd.Cmd):
 
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
+            if args not in models.classes:
                 print("** class doesn't exist **")
                 return
             for k, v in models.storage._FileStorage__objects.items():
@@ -230,7 +230,7 @@ class HBNBCommand(cmd.Cmd):
         else:  # class name not present
             print("** class name missing **")
             return
-        if c_name not in HBNBCommand.classes:  # class name invalid
+        if c_name not in models.classes:  # class name invalid
             print("** class doesn't exist **")
             return
 
