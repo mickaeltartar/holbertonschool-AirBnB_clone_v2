@@ -8,7 +8,7 @@ import models
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
-    # determines prompt for interactive/non-interactive modes
+    # Determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
@@ -82,7 +82,8 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    # Create
+    # CREATE
+    # updated to allow for obj creation w/ given parameter
     # ============================================================ #
 
     def do_create(self, args):
@@ -90,10 +91,41 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in models.classes:
+
+        arg_list = args.split()
+        class_name = arg_list[0]
+
+        if class_name not in models.classes:
             print("** class doesn't exist **")
             return
-        new_instance = models.classes[args]()
+
+        new_instance = models.classes[class_name]()
+
+        # If only class_name = save + print ID
+        if len(arg_list) == 1:
+            models.storage.save()
+            print(new_instance.id)
+            models.storage.save()
+            return
+
+        # Set attributes if additional args are given
+        else:
+            for argument in arg_list[1:]:
+                if '=' not in argument:
+                    continue
+
+                key, value = argument.split('=')
+
+                if value[0] == '"':
+                    value = value.replace('_', ' ')
+                    value = value[1:-1]
+                elif '.' in value:
+                    value = float(value)
+                else:
+                    value = int(value)
+
+                setattr(new_instance, key, value)
+
         models.storage.save()
         print(new_instance.id)
         models.storage.save()
