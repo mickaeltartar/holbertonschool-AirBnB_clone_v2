@@ -12,25 +12,25 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
     # Determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
-    classes = {'BaseModel': BaseModel,
-    'User': User,
-    'Place': Place,
-    'State': State,
-    'City': City,
-    'Amenity': Amenity,
-    'Review': Review}
+    classes = {
+        'BaseModel': BaseModel, 'User': User, 'Place': Place,
+        'State': State, 'City': City, 'Amenity': Amenity,
+        'Review': Review
+    }
 
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
 
-    types = {'number_rooms': int, 'number_bathrooms': int, 'max_guest': int,
-             'price_by_night': int, 'latitude': float,'longitude': float}
+    types = {
+        'number_rooms': int, 'number_bathrooms': int,
+        'max_guest': int, 'price_by_night': int,
+        'latitude': float, 'longitude': float
+    }
 
     # Alternative command syntax
     # ============================================================ #
@@ -107,37 +107,25 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
+
+        arguments = args.split()
+        class_name = arguments[0]
+
         if not args:
             print("** class name missing **")
             return
-
-        arg_list = args.split()
-        class_name = arg_list[0]
-
-        if class_name not in HBNBCommand.classes:
+        elif class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
         new_instance = HBNBCommand.classes[class_name]()
 
-        # If only class_name = save + print ID
-        if len(arg_list) == 1:
-            models.storage.save()
-            print(new_instance.id)
-            models.storage.save()
-            return
-
-        # Set attributes if additional args are given
-        else:
-            for argument in arg_list[1:]:
-                if '=' not in argument:
-                    continue
-
-                key, value = argument.split('=')
-
-                if value[0] == '"':
+        if len(arguments) > 1:
+            for arg in arguments[1:]:
+                key, value = arg.split("=")
+                if '"' in value:
+                    value = value.replace('"', '')
                     value = value.replace('_', ' ')
-                    value = value[1:-1]
                 elif '.' in value:
                     value = float(value)
                 else:
@@ -145,8 +133,8 @@ class HBNBCommand(cmd.Cmd):
 
                 setattr(new_instance, key, value)
 
-        models.storage.save()
         print(new_instance.id)
+        new_instance.save()
         models.storage.save()
 
     def help_create(self):
@@ -238,13 +226,12 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            # for cls in models.classes.values():
-            for k, v in models.storage.all().items():
+            for k, v in models.storage.all(eval(args)).items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
-                else:
-                    for k, v in models.storage.all().items():
-                        print_list.append(str(v))
+        else:
+            for k, v in models.storage.all().items():
+                print_list.append(str(v))
 
         print(print_list)
 
@@ -259,7 +246,7 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """Count current number of class instances"""
         count = 0
-        for k, v in models.storage.all().items():
+        for k, v in models.storage._FileStorage__objects.items():
             if args == k.split('.')[0]:
                 count += 1
         print(count)
