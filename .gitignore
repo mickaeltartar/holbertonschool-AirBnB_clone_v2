@@ -3,3 +3,7 @@
 
 # PYC
 *__pycache__
+
+# Test Files
+test_params_create
+test.py
