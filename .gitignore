@@ -1,3 +1,6 @@
+# DS_Store
+.DS_Store
+
 # JSON
 *.json
 
@@ -8,3 +11,5 @@
 test_params_create
 test.py
 main_delete.py
+consigne.txt
+main_place_amenities.py
