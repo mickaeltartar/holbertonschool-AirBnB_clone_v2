@@ -23,7 +23,8 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
                                     "amenity_id",
                                     String(60),
                                     ForeignKey("amenities.id"),
-                                    primary_key=True, nullable=False
+                                    primary_key=True,
+                                    nullable=False
                                     )
                                 )
 
