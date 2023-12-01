@@ -1,142 +1,261 @@
-<center> <h1>HBNB - The Console</h1> </center>
+![hbnb-logo](https://i.imgur.com/GM1iQ0P.png)
 
-This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
+# <p align = "center">HolbertonBnB</p>
 
----
+# <p align = "center">AirBnB Clone - MySQL</p>
 
-<center><h3>Repository Contents by Project Task</h3> </center>
+This is the second step towards building our first full web application : the **AirBnB clone**
 
-| Tasks | Files | Description |
-| ----- | ----- | ------ |
-| 0: Authors/README File | [AUTHORS](https://github.com/justinmajetich/AirBnB_clone/blob/dev/AUTHORS) | Project authors |
-| 1: Pep8 | N/A | All code is pep8 compliant|
-| 2: Unit Testing | [/tests](https://github.com/justinmajetich/AirBnB_clone/tree/dev/tests) | All class-defining modules are unittested |
-| 3. Make BaseModel | [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Defines a parent class to be inherited by all model classes|
-| 4. Update BaseModel w/ kwargs | [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Add functionality to recreate an instance of a class from a dictionary representation|
-| 5. Create FileStorage class | [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) [/models/_ _init_ _.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/__init__.py) [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Defines a class to manage persistent file storage system|
-| 6. Console 0.0.1 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) | Add basic functionality to console program, allowing it to quit, handle empty lines and ^D |
-| 7. Console 0.1 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) | Update the console with methods allowing the user to create, destroy, show, and update stored data |
-| 8. Create User class | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) [/models/user.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/user.py) | Dynamically implements a user class |
-| 9. More Classes | [/models/user.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/user.py) [/models/place.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/place.py) [/models/city.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/city.py) [/models/amenity.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/amenity.py) [/models/state.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/state.py) [/models/review.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/review.py) | Dynamically implements more classes |
-| 10. Console 1.0 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) | Update the console and file storage system to work dynamically with all  classes update file storage |
-<br>
-<br>
-<center> <h2>General Use</h2> </center>
+For this project, we have focused on implementing an additional storage option, which, as you can see from the diagram below, is the second step of the Airbnb Clone projects to follow in the coming weeks
 
-1. First clone this repository.
+![hbnb-diag-step2](https://i.imgur.com/keAoFFG.png)
 
-3. Once the repository is cloned locate the "console.py" file and run it as follows:
+🚨 You can find the very first step of this project **[here](https://github.com/ValPumpkins/holbertonschool-AirBnB_clone)**, all info about the cobsole can be find in this [repository](https://github.com/ValPumpkins/holbertonschool-AirBnB_clone) **[README](https://github.com/ValPumpkins/holbertonschool-AirBnB_clone/blob/main/README.md)**
+
+
+## 🛠️ Console Setup
+1. Clone this git repository
+
+```bash
+git clone https://github.com/ValPumpkins/holbertonschool-AirBnB_clone_v2.git
+cd holbertonschool-AirBnB_clone_v2
 ```
-/AirBnB_clone$ ./console.py
+2. You can now use the command interpreter
+
+```bash
+./console
 ```
-4. When this command is run the following prompt should appear:
+3. If all goes well, the following prompt should appear
+
+```bash
+(hbtn)
 ```
-(hbnb)
+4. You can now use it as you wish. The commands available are detailed below, in the "*Commands*" category.
+
+### 💡 Bonus
+
+This shell can also work in non-interactive mode :
+
+```bash
+echo "help" | ./console.py
 ```
-5. This prompt designates you are in the "HBnB" console. There are a variety of commands available within the console program.
 
-##### Commands
-    * create - Creates an instance based on given class
+## 🖲️ Commands
+Once the console is open, you can type `help` to see all the commands available:
+```bash
+(hbnb) help
 
-    * destroy - Destroys an object based on class and UUID
-
-    * show - Shows an object based on class and UUID
-
-    * all - Shows all objects the program has access to, or all objects of a given class
-
-    * update - Updates existing attributes an object based on class name and UUID
-
-    * quit - Exits the program (EOF will as well)
-
-
-##### Alternative Syntax
-Users are able to issue a number of console command using an alternative syntax:
-
-	Usage: <class_name>.<command>([<id>[name_arg value_arg]|[kwargs]])
-Advanced syntax is implemented for the following commands: 
-
-    * all - Shows all objects the program has access to, or all objects of a given class
-
-	* count - Return number of object instances by class
-
-    * show - Shows an object based on class and UUID
-
-	* destroy - Destroys an object based on class and UUID
-
-    * update - Updates existing attributes an object based on class name and UUID
-
-<br>
-<br>
-<center> <h2>Examples</h2> </center>
-<h3>Primary Command Syntax</h3>
-
-###### Example 0: Create an object
-Usage: create <class_name>
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
 ```
+
+* **create** - Creates an instance based on given class
+
+* **destroy** - Destroys an object based on class and UUID
+
+* **show** - Shows an object based on class and UUID
+
+* **all** - Shows all objects the program has access to, or all objects of a given class
+
+* **update** - Updates existing attributes an object based on class name and UUID
+
+* **quit** - Exits the program (EOF will as well)
+
+
+### 💡 Alt syntax
+You can also used every commands like that :
+```bash
+(hbnb) <class_name>.cmd(<optional arg>)
+```
+```bash
+(hbnb) User.create()
+1337
+(hbnb) User.update(1337, name, Bernard)
+```
+
+### 📺 Outputs
+
+- **create** :
+```bash
 (hbnb) create BaseModel
 ```
+output ⤵️
+```bash
+bf68a684-6994-41cc-82f2-2d1341e711b3
 ```
-(hbnb) create BaseModel
-3aa5babc-efb6-4041-bfe9-3cc9727588f8
-(hbnb)                   
+- **show**
+```bash
+(hbnb) show BaseModel bf68a684-6994-41cc-82f2-2d1341e711b3
 ```
-###### Example 1: Show an object
-Usage: show <class_name> <_id>
+output ⤵️
+```bash
+[BaseModel] (bf68a684-6994-41cc-82f2-2d1341e711b3) {'id': 'bf68a684-6994-41cc-82f2-2d1341e711b3', 'created_at': datetime.datetime(2023, 11, 1, 17, 44, 6, 792332), 'updated_at': datetime.datetime(2023, 11, 1, 17, 44, 6, 792371)}
+```
+- **count**
+```bash
+(hbnb) count User
+```
+output ⤵️
+```bash
+2
+```
+- **update**
+```bash
+(hbnb) update BaseModel bf68a684-6994-41cc-82f2-2d1341e711b3 name "Roger"
+```
+output ⤵️
+```bash
+no output
+```
+but `file.json` is updated :
+```json
+{
+	"BaseModel.bf68a684-6994-41cc-82f2-2d1341e711b3": {
+        "id": "bf68a684-6994-41cc-82f2-2d1341e711b3",
+        "created_at": "2023-11-01T17:44:06.792332",
+        "updated_at": "2023-11-01T17:48:32.407856",
+        "name": "Roger",
+        "__class__": "BaseModel"
+    }
+}
+```
+- **destroy**
+```bash
+(hbnb) destroy BaseModel bf68a684-6994-41cc-82f2-2d1341e711b3
+```
+output ⤵️
+```bash
+no output
+```
+but `file.json` is updated :
+```json
+{}
+```
 
-```
-(hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-[BaseModel] (3aa5babc-efb6-4041-bfe9-3cc9727588f8) {'id': '3aa5babc-efb6-4041-bfe9-3cc9727588f8', 'created_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96959), 
-'updated_at': datetime.datetime(2020, 2, 18, 14, 21, 12, 96971)}
-(hbnb)  
-```
-###### Example 2: Destroy an object
-Usage: destroy <class_name> <_id>
-```
-(hbnb) destroy BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-(hbnb) show BaseModel 3aa5babc-efb6-4041-bfe9-3cc9727588f8
-** no instance found **
-(hbnb)   
-```
-###### Example 3: Update an object
-Usage: update <class_name> <_id>
-```
-(hbnb) update BaseModel b405fc64-9724-498f-b405-e4071c3d857f first_name "person"
-(hbnb) show BaseModel b405fc64-9724-498f-b405-e4071c3d857f
-[BaseModel] (b405fc64-9724-498f-b405-e4071c3d857f) {'id': 'b405fc64-9724-498f-b405-e4071c3d857f', 'created_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729889), 
-'updated_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729907), 'first_name': 'person'}
-(hbnb)
-```
-<h3>Alternative Syntax</h3>
+## 🗃️ Classes
+### 👑 BaseModel
+The **BaseModel class** is the base class for this project and defines all the attributes for the other classes
 
-###### Example 0: Show all User objects
-Usage: <class_name>.all()
-```
-(hbnb) User.all()
-["[User] (99f45908-1d17-46d1-9dd2-b7571128115b) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 34, 92071), 'id': '99f45908-1d17-46d1-9dd2-b7571128115b', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 34, 92056)}", "[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
-```
+`Base = declarative_base()` : declaration that creates a base class for model definitions (in SQLAlchemy)
 
-###### Example 1: Destroy a User
-Usage: <class_name>.destroy(<_id>)
-```
-(hbnb) User.destroy("99f45908-1d17-46d1-9dd2-b7571128115b")
-(hbnb)
-(hbnb) User.all()
-(hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
-```
-###### Example 2: Update User (by attribute)
-Usage: <class_name>.update(<_id>, <attribute_name>, <attribute_value>)
-```
-(hbnb) User.update("98bea5de-9cb0-4d78-8a9d-c4de03521c30", name "Todd the Toad")
-(hbnb)
-(hbnb) User.all()
-(hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'name': 'Todd the Toad', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
-```
-###### Example 3: Update User (by dictionary)
-Usage: <class_name>.update(<_id>, <dictionary>)
-```
-(hbnb) User.update("98bea5de-9cb0-4d78-8a9d-c4de03521c30", {'name': 'Fred the Frog', 'age': 9})
-(hbnb)
-(hbnb) User.all()
-(hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'name': 'Fred the Frog', 'age': 9, 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
-```
+| Class attributes | Public instance methods |
+| -------- | -------- | -------- |
+| `id`    | `save`   |
+| `created_at`    | `to_dict`    |
+| `updated_at`    | `delete`   |
+
+### 👶 Others Classes
+#### 🚨 Inherits  from `BaseModel`
+
+| Class names | `__tablename__` | Class Attributes |
+| -------- | -------- | -------- |
+| User   |  `users`   | `email`  / `password` / `first_name` / `last_name`      |
+| State    | `states`   | `name`   |
+| City    |   `cities`  | `state_id` / `name`    |
+| Amenity    |  `amenities`   | `name`    |
+| Place    |   `places`  | `city_id`  / `user_id` / `name` / `description` / `number_rooms` / `number_bathrooms` / `max_guest` / `price_by_night` / `latitude` / `longitude` / `amenity_ids`    |
+| Review    |  `reviews`  | `place_id` / `user_id` / `text`    |
+
 <br>
+<br>
+
+# 📦 Storage
+## 🚨 Our main focus here
+### 1️⃣ FileStorage mode
+The `FileStorage` class is used to save and load data from a JSON file.
+
+It acts as a bridge between the application's objects and a file, ensuring data persistence, it allows the application to store and retrieve instances of various classes efficiently.
+
+Environmental variable : `HBNB_TYPE_STORAGE=file`.
+
+In `FileStorage` mode, each time the backend is initialized, an instance of FileStorage named storage is created. This object is loaded or reloaded with the class instances that are stored in the JSON file. The storage is responsible for tracking these changes and updating the `file.json` accordingly. It ensures that the data in the JSON file accurately reflects the current state of the class instances.
+
+| Public instance methods | Private class attributes |
+| -------- | -------- |
+| `all`    | `file_path`    |
+| `new`   | `objects`   |
+| `save`    | -    |
+| `reload`    | -    |
+| `delete`    | -    |
+
+### 2️⃣ DBStorage mode
+The `DBStorage` mode is the new engine we added in this step and is run by setting the environmental variables `HBNB_TYPE_STORAGE=db`.
+
+| Public instance methods | Private class attributes |
+| -------- | -------- |
+| `all`    | `__engine`    |
+| `new`   | `__session`   |
+| `save`    | -    |
+| `reload`    | -    |
+| `delete`    | -    |
+
+The object created after each initialization is loaded or reloaded from the MySQL database specified in this environmental variables :
+- `HBNB_ENV` : running environment ("dev" or "test")
+- `HBNB_MYSQL_USER` : username of MySQL
+- `HBNB_MYSQL_PWD` : password of MySQL
+- `HBNB_MYSQL_HOST` : hostname of MySQL
+- `HBNB_MYSQL_DB`: database name of MySQL
+
+The connection and querying processes are facilitated through SQLAlchemy.
+
+You will find in this repository, this two scripts :
+- `setup_mysql_dev.sql` : for database `hbnb_dev_db`
+- `setup_mysql_test.sql` : for database `hbnb_test_db`
+
+to configure `hbnb_dev_db` and `hbnb_test_db` databases on a MySQL server.
+
+These two scripts enable you to set up the databases you need for the DBStorage mode to work properly.
+
+#### 📺 Output example for DBStorage
+- To create a user :
+```bash
+echo 'create User email="tetris@dog.go" password="dogpwd" first_name="Tetris" last_name="Pumpkins"' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+```
+output ⤵️
+```bash
+(hbnb)
+76a239c3-b5fd-4302-bed0-11b5fe05afe0
+(hbnb)
+```
+- Check if everything has been entered correctly :
+```bash
+echo 'all User' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+```
+output ⤵️
+```bash
+(hbnb)
+[[User] (76a239c3-b5fd-4302-bed0-11b5fe05afe0) {'first_name': 'Tetris', 'last_name': 'Pumpkins', 'created_at': datetime.datetime(2023, 12, 1, 11, 1, 6), 'updated_at': datetime.datetime(2023, 12, 1, 11, 1, 6), 'email': 'tetris@dog.go', 'password': 'dogpwd', 'id': '76a239c3-b5fd-4302-bed0-11b5fe05afe0'}]
+(hbnb)
+```
+```bash
+echo 'SELECT * FROM users\G' | mysql -uhbnb_dev -p hbnb_dev_db
+Enter password:
+```
+output ⤵️
+```bash
+*************************** 1. row ***************************
+     email: tetris@dog.go
+  password: dogpwd
+first_name: Tetris
+ last_name: Pumpkins
+        id: 76a239c3-b5fd-4302-bed0-11b5fe05afe0
+created_at: 2023-12-01 11:01:06
+updated_at: 2023-12-01 11:01:06
+```
+
+## 💪 Testing
+Unittests for this project are defined in the `tests` folder.
+You can run the entire test suite by using the following command :
+```bash
+python3 -m unittest discover tests
+```
+
+## 👥 Team
+### V1 :
+- Justin Majetich
+- Ezra Nobrega
+
+### V2 :
+- 👨‍💻 Mickaël Tartar aka [mickaeltartar](https://github.com/mickaeltartar)
+- 🥦 Valentine Quignon aka [ValPumpkins](https://github.com/ValPumpkins)
