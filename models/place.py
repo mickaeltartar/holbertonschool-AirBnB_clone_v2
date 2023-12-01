@@ -30,7 +30,7 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
 
 
 class Place(BaseModel, Base):
-    """ A place to stay """
+    """ Defines Place class """
     __tablename__ = 'places'
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
@@ -66,7 +66,7 @@ class Place(BaseModel, Base):
     if getenv('HBNB_TYPE_STORAGE') != 'db':
         @property
         def reviews(self):
-            """ Return list of reviews """
+            """ Return Reviews list """
             list_reviews = []
 
             for value in models.storage.all(Review).values():
@@ -77,7 +77,7 @@ class Place(BaseModel, Base):
 
         @property
         def amenities(self):
-            """ Return the list of amenities """
+            """ Return Amenities list """
             list_amenities = []
 
             for value in models.storage.all(Amenity).values():
@@ -88,7 +88,7 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, cls):
-            """ id of amenity """
+            """ Amenity id """
             if not isinstance(cls, Amenity):
                 return
             self.amenity_ids.append(cls.id)

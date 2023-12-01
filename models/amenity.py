@@ -6,6 +6,7 @@ from os import getenv
 
 
 class Amenity(BaseModel, Base):
+    """ Defines Amenity Class """
 
     __tablename__ = "amenities"
     if getenv("HBNB_TYPE_STORAGE") == "db":

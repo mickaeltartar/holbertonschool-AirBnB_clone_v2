@@ -10,7 +10,7 @@ from os import getenv
 
 
 class State(BaseModel, Base):
-    """ State class """
+    """ Defines State class """
     __tablename__ = "states"
 
     name = Column(String(128), nullable=False)
@@ -23,7 +23,7 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
-        """Returns the list of cities associated with this state."""
+        """ Returns list of cities associated with state """
         cities_list = []
         for city in models.storage.all(City).values():
             if self.id == city.state_id:
