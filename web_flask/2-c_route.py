@@ -28,8 +28,3 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
 
 
-@app.route("/c/<text>", strict_slashes=False)
-def c_text(text):
-    """ Returns string of a web server """
-    return "C {}".format(text.replace("_", " "))
-
